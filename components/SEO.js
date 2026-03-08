@@ -254,8 +254,8 @@ const generateStructuredData = (meta, siteInfo, url, image, author) => {
       description: meta.description,
       image: image,
       url: url,
-      datePublished: meta.publishDay,
-      dateModified: meta.lastEditedDay || meta.publishDay,
+      datePublished: meta.publishDay || undefined,
+      dateModified: meta.lastEditedDay || meta.publishDay || undefined,
       author: {
         '@type': 'Person',
         name: author
