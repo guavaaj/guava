@@ -30,6 +30,7 @@ export async function getStaticProps(req) {
     12,
     props?.NOTION_CONFIG
   )
+
   props.posts = props.allPages?.filter(
     page => page.type === 'Post' && page.status === 'Published'
   )
@@ -57,15 +58,13 @@ export async function getStaticProps(req) {
 
   // 生成robotTxt
   generateRobotsTxt(props)
-  generateRss(props)
   generateSitemapXml(props)
   checkDataFromAlgolia(props)
+
   if (siteConfig('UUID_REDIRECT', false, props?.NOTION_CONFIG)) {
     // 生成重定向 JSON
     generateRedirectJson(props)
   }
-
-  // 生成全文索引 - 仅在 yarn build 时执行 && process.env.npm_lifecycle_event === 'build'
 
   delete props.allPages
 
